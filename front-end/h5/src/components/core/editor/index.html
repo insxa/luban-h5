@@ -1,0 +1,51 @@
+<!--
+ * @Author: ly525
+ * @Date: 2020-05-24 12:43:06
+ * @LastEditors: ly525
+ * @LastEditTime: 2020-05-24 18:00:30
+ * @FilePath: /luban-h5/front-end/h5/src/components/core/editor/index.html
+ * @Github: https://github.com/ly525/luban-h5
+ * @Description: Do not edit
+ * @Copyright 2018 - 2019 luban-h5. All Rights Reserved
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>演示拖拽功能</title>
+</head>
+<body>
+  <button id="btn">demo</button>
+  <script>
+    var btn = document.getElementById('btn')
+    dragDom = null
+    var layer = {
+      x: 0,
+      y: 0
+    }
+    function mousedown (e) {
+      dragDom = e.target.cloneNode(true)
+      document.body.appendChild(dragDom)
+      layer.x = e.layerX
+      layer.y = e.layerY
+      dragDom.style.left = e.clientX - layer.x + 'px'
+      dragDom.style.top = e.clientY - layer.y + 'px'
+      dragDom.style.position = 'absolute'
+      document.addEventListener('mousemove', mousemove)
+      document.addEventListener('mouseup', mouseup)
+    }
+    function mousemove (e) {
+      dragDom.style.left = e.clientX - layer.x + 'px'
+      dragDom.style.top = e.clientY - layer.y + 'px'
+      console.log(111)
+    }
+    function mouseup (e) {
+      document.removeEventListener('mousemove', mousemove)
+      document.removeEventListener('mouseup', mouseup)
+    }
+    btn.addEventListener('mousedown', mousedown)
+
+  </script>
+</body>
+</html>

@@ -13,6 +13,10 @@ export default {
       required: false,
       type: Function
     },
+    mousedownFn: {
+      required: false,
+      type: Function
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -20,10 +24,12 @@ export default {
   },
   render: (h, { props, listeners, slots }) => {
     const onClick = props.clickFn || function () {}
+    const onMousedown = props.mousedownFn || function () {}
     return (
       <a-button
         class="shortcut-button"
         onClick={onClick}
+        onMousedown={onMousedown}
         disabled={props.disabled}
       >
         <i

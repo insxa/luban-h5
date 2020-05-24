@@ -20,7 +20,7 @@ import LogoOfHeader from '@/components/common/header/logo.js'
 import ExternalLinksOfHeader from '@/components/common/header/links.js'
 import LangSelect from '@/components/common/header/LangSelect.vue'
 import Feedback from '@/components/common/feedback/index'
-
+import DragMixin from './drag-mixin'
 // const sidebarMenus = [
 //   {
 //     i18nLabel: 'editor.sidebar.components',
@@ -102,6 +102,7 @@ const fixedTools = [
 ]
 
 export default {
+  mixins: [DragMixin],
   name: 'Editor',
   components: {
     LogoOfHeader,
@@ -147,12 +148,16 @@ export default {
     /**
      * !#zh 点击插件，copy 其基础数据到组件树（中间画布）
      * #!en click the plugin shortcut, create new Element with the plugin's meta data
-     * pluginInfo {Object}: 插件列表中的基础数据, {name}=pluginInfo
+     * pluginInfo {Object}: 插件列表中的基础数据
+     * pluginInfo = {
+        name: String,
+        customStyle?: Object
+     * }
      */
-    clone ({ name }) {
+    clone (element) {
       this.elementManager({
         type: 'add',
-        value: { name }
+        value: element
       })
     },
     /**
@@ -177,7 +182,11 @@ export default {
                 <strong>{ this.$t('editor.tip.click') }</strong>{ this.$t('editor.tip.click') }
               </i18n>
             </div>
-            <RenderShortcutsPanel pluginsList={this.pluginsList} handleClickShortcut={this.clone} />
+            <RenderShortcutsPanel
+              pluginsList={this.pluginsList}
+              handleClickShortcut={this.clone}
+              handleDragStart={this.handleDragStart}
+            />
           </a-tab-pane>
           <a-tab-pane key='page-manager' tab={this.$t('editor.sidebar.pages')}>
             <RenderPageManager

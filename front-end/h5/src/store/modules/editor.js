@@ -13,7 +13,24 @@ const state = {
     uuidMap2Name: {},
     formRecords: []
   },
-  workTemplates: []
+  workTemplates: [],
+  dragConfig: {
+    isPreDrag: false,
+    isDrag: false,
+    isDragArea: false,
+    control: null,
+    insertControlId: '',
+    insertControlSlotIndex: 0,
+    targetFormControlId: '',
+    startLoc: {
+      x: 0,
+      y: 0
+    },
+    endLoc: {
+      x: 0,
+      y: 0
+    }
+  }
 }
 
 // getters

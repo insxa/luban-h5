@@ -23,6 +23,12 @@ export const actions = {
 
 // mutations
 export const mutations = {
+  setDragConfig (state, payload) {
+    state.dragConfig = {
+      ...state.dragConfig,
+      ...payload
+    }
+  },
   setEditingElement (state, payload) {
     state.editingElement = payload
   },
@@ -40,6 +46,7 @@ export const mutations = {
     switch (type) {
       case 'add':
         const vm = getVM(value.name)
+        vm.$options.customStyle = value.customStyle
         const element = new Element(vm.$options)
         elements.push(element)
         break
