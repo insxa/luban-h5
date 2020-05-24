@@ -185,7 +185,7 @@ export default {
             <RenderShortcutsPanel
               pluginsList={this.pluginsList}
               handleClickShortcut={this.clone}
-              handleDragStart={this.handleDragStart}
+              handleDragStart={this.handleDragStartFromMixin}
             />
           </a-tab-pane>
           <a-tab-pane key='page-manager' tab={this.$t('editor.sidebar.pages')}>

@@ -66,7 +66,7 @@ export default {
     }
   },
   methods: {
-    handleDragStart (element, e) {
+    handleDragStartFromMixin (element, e) {
       // https://developer.mozilla.org/zh-CN/docs/Web/API/event.button
       // 0 为 左键点击.
       if (e.button !== 0) return
