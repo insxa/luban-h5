@@ -113,7 +113,8 @@ export default {
     isPreviewMode: false,
     activeTabKey: '属性',
     previewVisible: false,
-    scaleRate: 1
+    scaleRate: 1,
+    propsPanelWidth: 320
   }),
   computed: {
     ...mapState('editor', {
@@ -366,7 +367,25 @@ export default {
               }
             </a-button-group>
           </a-layout-sider>
-          <a-layout-sider width="320" theme='light' style={{ background: '#fff', padding: '0 0 0 12px' }}>
+          <div
+            width="1"
+            theme='light'
+            style={{ border: '1px solid red', cursor: 'col-resize' }}
+            onMousedown={(e) => {
+              let startX = e.clientX
+              let move = moveEvent => {
+                const offset = startX - moveEvent.clientX
+                this.propsPanelWidth += offset
+              }
+
+              let up = moveEvent => {
+                document.removeEventListener('mousemove', move, true)
+                document.removeEventListener('mouseup', up, true)
+              }
+              document.addEventListener('mousemove', move, true)
+              document.addEventListener('mouseup', up, true)
+            }}></div>
+          <a-layout-sider width={this.propsPanelWidth} data-set-width={this.propsPanelWidth} theme='light' style={{ background: '#fff', padding: '0 0 0 12px' }}>
             <a-tabs
               style="height: 100%;"
               tabBarGutter={10}
